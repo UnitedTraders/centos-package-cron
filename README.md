@@ -54,8 +54,8 @@ sudo yum install rpm-build yum-utils
 # copy centos-package-cron.spec.in to centos-package-cron.spec and put the proper version numbers in those placeholders
 sudo yum-builddep -y --disablerepo=updates centos-package-cron.spec
 # Download a tar gzip of the source to /some/path/containing/source/centos_package_cron_src.tgz
-rpmbuild -bb --verbose -D "_topdir `pwd`" -D "_sourcedir /some/path/containing/source" -D "_builddir `pwd`" centos-package-cron.spec
-sudo yum install centos-package-cron-1.0.6-0.1.el7.centos.x86_64.rpm
+rpmbuild -bb --verbose -D "_topdir `pwd`" -D "_sourcedir /app" -D "_builddir `pwd`" centos-package-cron.spec
+sudo yum localinstall RPMS/centos-package-cron-2.0.0-2.el7.x86_64
 ```
 
 ## Usage
@@ -67,7 +67,7 @@ sudo yum install centos-package-cron-1.0.6-0.1.el7.centos.x86_64.rpm
 centos-package-cron -fo
 
 # install all security updates except postgresql and docker
-centos-package-cron -f minimal -fo | grep -v postgresql | grep -v docker | grep -v containerd | xargs sudo yum upgrade
+centos-package-cron -f minimal -fo | grep -v postgresql | grep -v docker | grep -v containerd | xargs sudo yum -y upgrade
 ```
 
 ## TODO
